@@ -1,0 +1,4 @@
+name: FestiveArrows
+main: me.yukonapplegeek.festivearrows.FestiveArrows
+version: ${project.version}
+author: YukonAppleGeek
