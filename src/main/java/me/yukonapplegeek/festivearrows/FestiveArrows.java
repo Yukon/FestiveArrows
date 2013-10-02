@@ -31,7 +31,7 @@ public class FestiveArrows extends JavaPlugin implements Listener {
 
         fireworkMeta.addEffect(FireworkEffect.builder()
                                              .with(Type.BURST)
-                                             .withColor(Color.RED).withColor(Color.WHITE).withColor(Color.BLUE)
+                                             .withColor(Color.ORANGE).withColor(Color.BLACK).withColor(Color.WHITE)
                                              .withTrail()
                                              .build());
         firework.setFireworkMeta(fireworkMeta);
