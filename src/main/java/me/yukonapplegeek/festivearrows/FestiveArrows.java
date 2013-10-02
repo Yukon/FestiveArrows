@@ -29,14 +29,15 @@ public class FestiveArrows extends JavaPlugin implements Listener {
         FireworkMeta fireworkMeta = (FireworkMeta) (new ItemStack(Material.FIREWORK)).getItemMeta();
         Firework firework = (Firework) event.getProjectile().getLocation().getWorld().spawnEntity(event.getProjectile().getLocation(), EntityType.FIREWORK);
 
-        fireworkMeta.addEffect(FireworkEffect.builder()
-                                             .with(Type.BURST)
+             fireworkMeta.addEffect(FireworkEffect.builder()
+                                             .with(Type.CREEPER)
                                              .withColor(Color.ORANGE).withColor(Color.WHITE)
-                                             .withFade(Color.BLACK)
+                                             .withFade(Color.WHITE).withFade(Color.BLACK)
                                              .withTrail()
                                              .build());
         firework.setFireworkMeta(fireworkMeta);
         event.getProjectile().setPassenger(firework);
     }
+
     
 }
