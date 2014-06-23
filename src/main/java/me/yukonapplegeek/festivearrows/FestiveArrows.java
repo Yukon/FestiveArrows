@@ -1,16 +1,11 @@
 package me.yukonapplegeek.festivearrows;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FestiveArrows extends JavaPlugin implements Listener {
@@ -25,17 +20,24 @@ public class FestiveArrows extends JavaPlugin implements Listener {
     }
     
     @EventHandler
-    public void onBowShoot(EntityShootBowEvent event) {
-        FireworkMeta fireworkMeta = (FireworkMeta) (new ItemStack(Material.FIREWORK)).getItemMeta();
-        Firework firework = (Firework) event.getProjectile().getLocation().getWorld().spawnEntity(event.getProjectile().getLocation(), EntityType.FIREWORK);
-
-        fireworkMeta.addEffect(FireworkEffect.builder()
-                                             .with(Type.BURST)
-                                             .withColor(Color.RED).withColor(Color.WHITE).withColor(Color.BLUE)
-                                             .withTrail()
-                                             .build());
-        firework.setFireworkMeta(fireworkMeta);
-        event.getProjectile().setPassenger(firework);
+    public void onBowShoot(final EntityShootBowEvent event) {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+            FireworkEffectPlayer fwp = new FireworkEffectPlayer();
+            FireworkEffect fe = FireworkEffect.builder()
+                    .with(FireworkEffect.Type.BURST)
+                    .withColor(Color.RED, Color.WHITE, Color.BLUE)
+                    .withTrail()
+                    .build();
+            @Override
+            public void run() {
+                try {
+                    fwp.playFirework(event.getProjectile().getWorld(), event.getProjectile().getLocation(), fe);
+                }
+                catch (Exception exc) {
+                    exc.getStackTrace();
+                }
+            }
+        }, 15);
     }
     
 }
