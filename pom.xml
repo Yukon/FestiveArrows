@@ -44,16 +44,12 @@
         <dependency>
             <groupId>tc.oc</groupId>
             <artifactId>sportbukkit-api</artifactId>
-            <version>1.6.1-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <version>1.7.9-R0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>tc.oc</groupId>
             <artifactId>sportbukkit</artifactId>
-            <version>1.6.1-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <version>1.7.9-R0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <properties>

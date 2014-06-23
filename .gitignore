@@ -24,3 +24,7 @@ target
 *.xcworkspace
 xcuserdata
 *class
+
+# Idea generated files
+*.iml
+.idea
