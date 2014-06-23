@@ -45,11 +45,15 @@
             <groupId>tc.oc</groupId>
             <artifactId>sportbukkit-api</artifactId>
             <version>1.7.9-R0.3-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>tc.oc</groupId>
             <artifactId>sportbukkit</artifactId>
             <version>1.7.9-R0.3-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <properties>
