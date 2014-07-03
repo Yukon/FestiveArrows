@@ -43,7 +43,7 @@ public class FestiveArrows extends JavaPlugin {
         firework.setFireworkMeta(meta);
         NBTTagCompound nbtData = new NBTTagCompound();
         nbtData.setInt("Life", 1);
-        nbtData.setInt("LifeTime", 1);
+        nbtData.setInt("LifeTime", 2);
         ((CraftFirework) firework).getHandle().a(nbtData);
     }
     
