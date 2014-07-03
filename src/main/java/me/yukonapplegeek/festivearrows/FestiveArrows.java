@@ -31,6 +31,9 @@ public class FestiveArrows extends JavaPlugin {
         if (this.getConfig().getBoolean("bow-enabled")) {
             this.getServer().getPluginManager().registerEvents(new BowEffect(), this);
         }
+        if (this.getConfig().getBoolean("death-enabled")) {
+            this.getServer().getPluginManager().registerEvents(new DeathEffect(), this);
+        }
     }
 
     public static void playFirework(Location location, FireworkEffect effect) {
