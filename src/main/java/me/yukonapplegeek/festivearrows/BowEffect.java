@@ -22,6 +22,6 @@ public class BowEffect implements Listener {
             public void run() {
                 FestiveArrows.playFirework(event.getProjectile().getLocation(), effect);
             }
-        }.runTaskLater(FestiveArrows.get(), 15);
+        }.runTaskLater(FestiveArrows.get(), FestiveArrows.get().getConfig().getInt("bow.delay", 15));
     }
 }

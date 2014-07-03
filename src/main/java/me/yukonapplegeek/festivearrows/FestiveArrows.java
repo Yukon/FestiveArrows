@@ -28,7 +28,7 @@ public class FestiveArrows extends JavaPlugin {
         this.saveConfig();
         this.reloadConfig();
 
-        if (this.getConfig().getBoolean("bow-enabled")) {
+        if (this.getConfig().getBoolean("bow.enabled")) {
             this.getServer().getPluginManager().registerEvents(new BowEffect(), this);
         }
         if (this.getConfig().getBoolean("death-enabled")) {
