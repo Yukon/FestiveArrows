@@ -57,7 +57,7 @@ public class FestiveArrows extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender.isOp() && cmd.getName().equalsIgnoreCase("letitgoboom")) {
+        if ((sender.isOp() || sender.hasPermission("festivearrows.letitgoboom")) && cmd.getName().equalsIgnoreCase("letitgoboom")) {
             letItGoBoomEnabled = !letItGoBoomEnabled;
             if (letItGoBoomEnabled) {
                 this.getServer().broadcastMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "Let it go BOOM!");
