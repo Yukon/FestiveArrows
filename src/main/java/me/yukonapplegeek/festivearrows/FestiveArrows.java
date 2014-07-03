@@ -1,14 +1,22 @@
 package me.yukonapplegeek.festivearrows;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
+import net.minecraft.server.v1_7_R3.NBTTagCompound;
 import org.bukkit.FireworkEffect;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_7_R3.entity.CraftFirework;
+import org.bukkit.entity.Firework;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class FestiveArrows extends JavaPlugin implements Listener {
+public class FestiveArrows extends JavaPlugin {
+    private static FestiveArrows festiveArrows;
+
+    public FestiveArrows() {
+        festiveArrows = this;
+    }
+    public static FestiveArrows get() {
+        return festiveArrows;
+    }
 
     @Override
     public void onDisable() {
@@ -16,28 +24,24 @@ public class FestiveArrows extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(this, this);
+        this.getConfig().options().copyDefaults(true);
+        this.saveConfig();
+        this.reloadConfig();
+
+        if (this.getConfig().getBoolean("bow-enabled")) {
+            this.getServer().getPluginManager().registerEvents(new BowEffect(), this);
+        }
     }
-    
-    @EventHandler
-    public void onBowShoot(final EntityShootBowEvent event) {
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-            FireworkEffectPlayer fwp = new FireworkEffectPlayer();
-            FireworkEffect fe = FireworkEffect.builder()
-                    .with(FireworkEffect.Type.BURST)
-                    .withColor(Color.RED, Color.WHITE, Color.BLUE)
-                    .withTrail()
-                    .build();
-            @Override
-            public void run() {
-                try {
-                    fwp.playFirework(event.getProjectile().getWorld(), event.getProjectile().getLocation(), fe);
-                }
-                catch (Exception exc) {
-                    exc.getStackTrace();
-                }
-            }
-        }, 15);
+
+    public static void playFirework(Location location, FireworkEffect effect) {
+        final Firework firework = location.getWorld().spawn(location, Firework.class);
+        FireworkMeta meta = firework.getFireworkMeta();
+        meta.addEffect(effect);
+        firework.setFireworkMeta(meta);
+        NBTTagCompound nbtData = new NBTTagCompound();
+        nbtData.setInt("Life", 1);
+        nbtData.setInt("LifeTime", 1);
+        ((CraftFirework) firework).getHandle().a(nbtData);
     }
     
 }
