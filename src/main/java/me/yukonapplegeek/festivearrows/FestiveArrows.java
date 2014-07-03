@@ -1,15 +1,21 @@
 package me.yukonapplegeek.festivearrows;
 
 import net.minecraft.server.v1_7_R3.NBTTagCompound;
+import org.bukkit.ChatColor;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_7_R3.entity.CraftFirework;
 import org.bukkit.entity.Firework;
+import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FestiveArrows extends JavaPlugin {
     private static FestiveArrows festiveArrows;
+    private LetItGoBoom letItGoBoomListener = new LetItGoBoom();
+    private boolean letItGoBoomEnabled = false;
 
     public FestiveArrows() {
         festiveArrows = this;
@@ -46,5 +52,21 @@ public class FestiveArrows extends JavaPlugin {
         nbtData.setInt("LifeTime", 2);
         ((CraftFirework) firework).getHandle().a(nbtData);
     }
-    
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (sender.isOp() && cmd.getName().equalsIgnoreCase("letitgoboom")) {
+            if (letItGoBoomEnabled) {
+                HandlerList.unregisterAll(letItGoBoomListener);
+            } else {
+                this.getServer().getPluginManager().registerEvents(letItGoBoomListener, this);
+                this.getServer().broadcastMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "Let it go BOOM!");
+            }
+            letItGoBoomEnabled = !letItGoBoomEnabled;
+
+            return true;
+        }
+
+        return false;
+    }
 }

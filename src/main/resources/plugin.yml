@@ -2,3 +2,9 @@ name: FestiveArrows
 main: me.yukonapplegeek.festivearrows.FestiveArrows
 version: ${project.version}
 author: YukonAppleGeek
+commands:
+   letitgoboom:
+      description: Let it go BOOM!
+      usage: /<command>
+      permission: <plugin name>.letitgoboom
+      permission-message: You don't have permission
