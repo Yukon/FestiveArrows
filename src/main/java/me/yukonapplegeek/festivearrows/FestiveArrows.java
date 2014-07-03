@@ -8,14 +8,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_7_R3.entity.CraftFirework;
 import org.bukkit.entity.Firework;
-import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FestiveArrows extends JavaPlugin {
     private static FestiveArrows festiveArrows;
-    private LetItGoBoom letItGoBoomListener = new LetItGoBoom();
-    private boolean letItGoBoomEnabled = false;
+    public boolean letItGoBoomEnabled = false;
 
     public FestiveArrows() {
         festiveArrows = this;
@@ -34,6 +32,7 @@ public class FestiveArrows extends JavaPlugin {
         this.saveConfig();
         this.reloadConfig();
 
+        this.getServer().getPluginManager().registerEvents(new LetItGoBoom(), this);
         if (this.getConfig().getBoolean("bow.enabled")) {
             this.getServer().getPluginManager().registerEvents(new BowEffect(), this);
         }
@@ -59,13 +58,10 @@ public class FestiveArrows extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender.isOp() && cmd.getName().equalsIgnoreCase("letitgoboom")) {
+            letItGoBoomEnabled = !letItGoBoomEnabled;
             if (letItGoBoomEnabled) {
-                HandlerList.unregisterAll(letItGoBoomListener);
-            } else {
-                this.getServer().getPluginManager().registerEvents(letItGoBoomListener, this);
                 this.getServer().broadcastMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + "Let it go BOOM!");
             }
-            letItGoBoomEnabled = !letItGoBoomEnabled;
 
             return true;
         }

@@ -15,6 +15,8 @@ public class LetItGoBoom implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        FestiveArrows.playFirework(event.getFrom(), effect);
+        if (FestiveArrows.get().letItGoBoomEnabled) {
+            FestiveArrows.playFirework(event.getFrom(), effect);
+        }
     }
 }
