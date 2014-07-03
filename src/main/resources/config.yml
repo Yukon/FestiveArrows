@@ -2,3 +2,4 @@ bow:
   enabled: true
   delay: 15
 death-enabled: true
+tnt-enabled: true

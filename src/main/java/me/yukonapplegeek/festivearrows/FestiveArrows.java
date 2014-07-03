@@ -40,6 +40,9 @@ public class FestiveArrows extends JavaPlugin {
         if (this.getConfig().getBoolean("death-enabled")) {
             this.getServer().getPluginManager().registerEvents(new DeathEffect(), this);
         }
+        if (this.getConfig().getBoolean("tnt-enabled")) {
+            this.getServer().getPluginManager().registerEvents(new TntEffect(), this);
+        }
     }
 
     public static void playFirework(Location location, FireworkEffect effect) {
